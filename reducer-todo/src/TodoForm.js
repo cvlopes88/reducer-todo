@@ -3,22 +3,19 @@ import { initialState, todoReducer } from './reducers/todoReducer';
 import TodoItems from './TodoItems';
 
 const TodoForm = () => {
-    const [todo, setTodo] = useState();
+    const [todo, setTodo] = useState('');
     const [state, dispatch] = useReducer(todoReducer, initialState);
    console.log('state', todo)
     const handleChange = e => {
-        
-       let value = e.target.value;
-       if (value !== null){
-        setTodo(value)
-       }
+     setTodo(e.target.value)
       
         
     };
 
     const handleSubmit = b => {
         b.preventDefault();
-        return 
+       
+         
     };
 
  return (
@@ -26,7 +23,7 @@ const TodoForm = () => {
          <h1>Todo Form</h1>
          <form onSubmit={handleSubmit}>
            
-         <TodoItems todos={state}  />
+         <TodoItems todos={state.tasks}  />
             
          <input type="text" name="todos" placeholder="need done" 
          value={todo} onChange={handleChange}
@@ -37,6 +34,11 @@ const TodoForm = () => {
              dispatch({ type: 'Add-todo', payload:todo})
          }}
          >Add Task</button>
+         <button
+         onClick={() => {
+           dispatch({ type: 'Delete-todo'})  
+         }}
+         >Delete completed</button>
          </form>
      </div>
  )
