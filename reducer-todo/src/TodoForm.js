@@ -1,11 +1,11 @@
 import React, { useState, useReducer } from "react";
 import { initialState, todoReducer } from './reducers/todoReducer';
-
+import TodoItems from './TodoItems';
 
 const TodoForm = () => {
     const [todo, setTodo] = useState();
     const [state, dispatch] = useReducer(todoReducer, initialState);
-   console.log('state', state)
+   console.log('state', todo)
     const handleChange = e => {
         
        let value = e.target.value;
@@ -26,7 +26,7 @@ const TodoForm = () => {
          <h1>Todo Form</h1>
          <form onSubmit={handleSubmit}>
            
-         <ul>{state.item}{""}</ul>
+         <TodoItems todos={state}  />
             
          <input type="text" name="todos" placeholder="need done" 
          value={todo} onChange={handleChange}
